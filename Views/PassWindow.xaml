@@ -1,0 +1,110 @@
+﻿<Window 
+      x:Class="WpfPass.Views.PassWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPass.Views"
+      xmlns:Converters="clr-namespace:WpfPass.Converters"
+      xmlns:viewModels="clr-namespace:WpfPass.ViewModels"
+      mc:Ignorable="d" 
+    
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    
+      Title="Окно ввода пароля" Height="300" Width="300">
+
+    <Window.DataContext>
+        <viewModels:PassWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Converters:BoolToColorConverter x:Key="ConvertCol"/>
+        <Converters:BoolToTextConverter x:Key="ConvertText"/>
+    </Window.Resources>
+
+
+    <Grid Background="#E4E4E4">
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Border
+            x:Name="Border"
+            VerticalAlignment="Center"
+            Padding="10"
+            CornerRadius="20"
+            Margin="5"
+            Background="White">
+
+            <Border.Effect >
+                <DropShadowEffect 
+                    BlurRadius="10"
+                    Color="LightGray"
+                    ShadowDepth="0">
+                </DropShadowEffect>
+            </Border.Effect>
+
+            <TextBlock
+                Text="Добрый день!"
+                FontSize="15"
+                FontWeight="Bold"
+                HorizontalAlignment="Center">
+            </TextBlock>
+        </Border>
+
+        <TextBox    
+            x:Name="TextBox1"
+            Grid.Row="1" 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Margin="5,5,0,5"
+            materialDesign:HintAssist.Hint="Введите пароль" 
+            materialDesign:HintAssist.FontFamily="Default"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding AuthInfo.Password}"
+            FontFamily="pack://application:,,,/Resources/#password">
+        </TextBox>
+       
+
+        <TextBox      
+            Grid.Row="2"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Margin="5"
+            materialDesign:HintAssist.Hint="Подтвердите пароль" 
+            materialDesign:HintAssist.FontFamily="Default"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding AuthInfo.NewPassword}"
+            FontFamily="pack://application:,,,/Resources/#password">
+        </TextBox>
+
+        <TextBlock
+            Grid.Row="3"
+            Background="#B5B5B5"
+            VerticalAlignment="Stretch" 
+            HorizontalAlignment="Stretch"
+            Margin="10" 
+            Text="{Binding AuthInfo.Answer, Converter={StaticResource ConvertText}}"    
+            Foreground="{Binding AuthInfo.Answer, Converter={StaticResource ConvertCol}}" 
+            FontSize="12"
+            TextAlignment="Center">
+        </TextBlock>
+
+        <Button
+            Grid.Row="4"
+            VerticalAlignment="Stretch" 
+            HorizontalAlignment="Stretch"
+            Margin="10,1"
+            Command="{Binding CheckPass}"
+            Content="Сверить пароли"
+            Style="{StaticResource MaterialDesignFlatButton}">
+        </Button>
+
+    </Grid>
+
+</Window> 
