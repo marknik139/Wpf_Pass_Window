@@ -14,16 +14,37 @@ namespace WpfPass.Models {
             set => SetProperty(ref _password, value);
         }
 
-        private string _newpassword;
-        public string NewPassword {
-            get => _newpassword;
-            set => SetProperty(ref _newpassword, value);
+
+        private string _login;
+        public string Login
+        {
+            get => _login;
+            set => SetProperty(ref _login, value);
         }
 
-        private Nullable<bool> _answer;
-        public Nullable<bool> Answer {
-            get => _answer;
-            set => SetProperty(ref _answer, value);
+
+        private string _fio;
+        public string Fio
+        {
+            get => _fio;
+            set => SetProperty(ref _fio, value);
         }
+
+
+        private int _age;
+        public int Age
+        {
+            get => _age;
+            set => SetProperty(ref _age, value);
+        }
+
+
+        private bool _isChecked;
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set => SetProperty(ref _isChecked, value);
+        }
+
     }
 }
